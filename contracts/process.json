@@ -1,0 +1,408 @@
+{
+  "contractVersion": "1.0",
+  "states": [
+    "Submitted",
+    "ChangesRequested",
+    "AwaitingApproval",
+    "Approved",
+    "ApprovalExpired",
+    "ReadyForProduction",
+    "InProduction",
+    "Completed",
+    "Cancelled"
+  ],
+  "terminalStates": [
+    "Completed",
+    "Cancelled"
+  ],
+  "roles": [
+    "Sales",
+    "Prepress",
+    "Approver",
+    "Production",
+    "Owner",
+    "Automation"
+  ],
+  "productTypes": [
+    "BusinessCards",
+    "Flyers",
+    "Posters",
+    "Booklets"
+  ],
+  "commands": [
+    "Submit",
+    "Validate",
+    "RequestChanges",
+    "Resubmit",
+    "ApprovalApproved",
+    "ApprovalRejected",
+    "ApprovalExpired",
+    "Release",
+    "StartProduction",
+    "Complete",
+    "Cancel"
+  ],
+  "transitions": [
+    {
+      "fromStatus": null,
+      "command": "Submit",
+      "roles": [
+        "Sales"
+      ],
+      "toStatus": "Submitted",
+      "requiredInputs": [
+        "Title",
+        "CustomerCode",
+        "ProductType",
+        "Quantity",
+        "DueAt"
+      ],
+      "guards": [
+        "DueAt > Created",
+        "SalesUPN derives from immutable Author"
+      ]
+    },
+    {
+      "fromStatus": "Submitted",
+      "command": "Validate",
+      "roles": [
+        "Prepress"
+      ],
+      "toStatus": "AwaitingApproval",
+      "requiredInputs": [
+        "QuoteEUR",
+        "DraftFilePath",
+        "CustomerConsentRef",
+        "ApproverUPN",
+        "PreflightChecklistRef"
+      ],
+      "guards": [
+        "QuoteEUR > 0",
+        "ApproverUPN allowed",
+        "PDF exists within DraftArtwork; <=20 MB",
+        "Manual preflight passed",
+        "Immutable approval snapshot exists before state mutation"
+      ]
+    },
+    {
+      "fromStatus": "Submitted",
+      "command": "RequestChanges",
+      "roles": [
+        "Prepress"
+      ],
+      "toStatus": "ChangesRequested",
+      "requiredInputs": [
+        "Reason"
+      ],
+      "guards": [
+        "Reason nonempty"
+      ]
+    },
+    {
+      "fromStatus": "ChangesRequested",
+      "command": "Resubmit",
+      "roles": [
+        "Sales"
+      ],
+      "toStatus": "Submitted",
+      "requiredInputs": [
+        "Title",
+        "CustomerCode",
+        "ProductType",
+        "Quantity",
+        "DueAt",
+        "Reason"
+      ],
+      "guards": [
+        "Updated business fields valid",
+        "Reason is correction note",
+        "DueAt > current UTC"
+      ]
+    },
+    {
+      "fromStatus": "AwaitingApproval",
+      "command": "ApprovalApproved",
+      "roles": [
+        "Automation"
+      ],
+      "toStatus": "Approved",
+      "requiredInputs": [
+        "ApprovalKey",
+        "ResponseUPN",
+        "ResponseAt"
+      ],
+      "guards": [
+        "Matching current ApprovalKey and RequestedRevision",
+        "ResponseUPN equals assigned approver",
+        "ResponseAt <= DeadlineUtc"
+      ]
+    },
+    {
+      "fromStatus": "AwaitingApproval",
+      "command": "ApprovalRejected",
+      "roles": [
+        "Automation"
+      ],
+      "toStatus": "ChangesRequested",
+      "requiredInputs": [
+        "ApprovalKey",
+        "ResponseUPN",
+        "ResponseAt",
+        "Reason"
+      ],
+      "guards": [
+        "Matching current ApprovalKey and RequestedRevision",
+        "ResponseUPN equals assigned approver",
+        "ResponseAt <= DeadlineUtc"
+      ]
+    },
+    {
+      "fromStatus": "AwaitingApproval",
+      "command": "ApprovalExpired",
+      "roles": [
+        "Automation"
+      ],
+      "toStatus": "ApprovalExpired",
+      "requiredInputs": [
+        "ApprovalKey"
+      ],
+      "guards": [
+        "Matching current ApprovalKey and RequestedRevision",
+        "Now >= DeadlineUtc"
+      ]
+    },
+    {
+      "fromStatus": "ApprovalExpired",
+      "command": "Resubmit",
+      "roles": [
+        "Sales"
+      ],
+      "toStatus": "Submitted",
+      "requiredInputs": [
+        "Title",
+        "CustomerCode",
+        "ProductType",
+        "Quantity",
+        "DueAt",
+        "Reason"
+      ],
+      "guards": [
+        "New revision; expired job cannot authorize",
+        "Updated business fields valid",
+        "DueAt > current UTC"
+      ]
+    },
+    {
+      "fromStatus": "Approved",
+      "command": "Release",
+      "roles": [
+        "Prepress"
+      ],
+      "toStatus": "ReadyForProduction",
+      "requiredInputs": [],
+      "guards": [
+        "Approved immutable snapshot exists and identity matches approved job",
+        "Copy snapshot to deterministic released path without overwrite before state mutation"
+      ]
+    },
+    {
+      "fromStatus": "ReadyForProduction",
+      "command": "StartProduction",
+      "roles": [
+        "Production"
+      ],
+      "toStatus": "InProduction",
+      "requiredInputs": [
+        "ProductionUPN"
+      ],
+      "guards": [
+        "Released file exists",
+        "ProductionUPN is configured Production identity"
+      ]
+    },
+    {
+      "fromStatus": "InProduction",
+      "command": "Complete",
+      "roles": [
+        "Production"
+      ],
+      "toStatus": "Completed",
+      "requiredInputs": [
+        "QCReference",
+        "WasteQuantity"
+      ],
+      "guards": [
+        "Manual QC passed",
+        "Completion timestamp set by dispatcher",
+        "0 <= WasteQuantity <= Quantity"
+      ]
+    },
+    {
+      "fromStatus": "Submitted",
+      "command": "Cancel",
+      "roles": [
+        "Sales",
+        "Owner"
+      ],
+      "toStatus": "Cancelled",
+      "requiredInputs": [
+        "Reason"
+      ],
+      "guards": [
+        "Reason nonempty",
+        "Production has not started"
+      ]
+    },
+    {
+      "fromStatus": "ChangesRequested",
+      "command": "Cancel",
+      "roles": [
+        "Sales",
+        "Owner"
+      ],
+      "toStatus": "Cancelled",
+      "requiredInputs": [
+        "Reason"
+      ],
+      "guards": [
+        "Reason nonempty",
+        "Production has not started"
+      ]
+    },
+    {
+      "fromStatus": "ApprovalExpired",
+      "command": "Cancel",
+      "roles": [
+        "Sales",
+        "Owner"
+      ],
+      "toStatus": "Cancelled",
+      "requiredInputs": [
+        "Reason"
+      ],
+      "guards": [
+        "Reason nonempty",
+        "Production has not started"
+      ]
+    },
+    {
+      "fromStatus": "Approved",
+      "command": "Cancel",
+      "roles": [
+        "Sales",
+        "Owner"
+      ],
+      "toStatus": "Cancelled",
+      "requiredInputs": [
+        "Reason"
+      ],
+      "guards": [
+        "Reason nonempty",
+        "Production has not started"
+      ]
+    },
+    {
+      "fromStatus": "ReadyForProduction",
+      "command": "Cancel",
+      "roles": [
+        "Sales",
+        "Owner"
+      ],
+      "toStatus": "Cancelled",
+      "requiredInputs": [
+        "Reason"
+      ],
+      "guards": [
+        "Reason nonempty",
+        "Production has not started"
+      ]
+    }
+  ],
+  "identifiers": {
+    "OrderKey": "^PO-[0-9]{6,}$",
+    "RequestKey": "^[A-Za-z0-9-]{1,100}$",
+    "ApprovalKey": "^PO-[0-9]{6,}-r[1-9][0-9]*$",
+    "EventKey": "OrderKey-rNewRevision",
+    "CommandKey": "CMD-<SharePoint immutable ID>",
+    "OrderKeySource": "PO- plus OrderCommands.ID padded to minimum 6 digits"
+  },
+  "validation": {
+    "Title": {
+      "minLength": 1,
+      "maxLength": 120
+    },
+    "Quantity": {
+      "integer": true,
+      "minimum": 1,
+      "maximum": 100000
+    },
+    "QuoteEUR": {
+      "currency": "EUR",
+      "decimalPlaces": 2,
+      "positiveAtValidate": true
+    },
+    "WasteQuantity": {
+      "integer": true,
+      "minimum": 0,
+      "maximum": "Quantity"
+    },
+    "timestamps": "UTC ISO 8601 with Z",
+    "CustomerCode": "Synthetic business identifier; no email address",
+    "Reason": "Nonempty plain text when required",
+    "files": {
+      "extensions": [
+        ".pdf"
+      ],
+      "maximumBytes": 20971520,
+      "draftLibrary": "DraftArtwork",
+      "snapshotPattern": "ProductionFiles/ApprovalSnapshots/{ApprovalKey}.pdf",
+      "releasedPattern": "ProductionFiles/{ApprovalKey}-approved.pdf",
+      "sameSiteOnly": true,
+      "reject": [
+        "..",
+        "external URL",
+        "unsupported extension",
+        "missing file"
+      ]
+    }
+  },
+  "sla": {
+    "ApprovalTimeoutHours": 72,
+    "ReminderHours": 24,
+    "StaleProcessingMinutes": 15
+  },
+  "revisionRules": {
+    "initial": 1,
+    "incrementEveryAcceptedTransition": true,
+    "ExpectedRevisionRequiredExcept": [
+      "Submit"
+    ],
+    "mismatch": "Rejected/StaleRevision; no mutation",
+    "ApprovalKeyRevision": "Revision at entry to AwaitingApproval; unchanged on approval acceptance",
+    "approvalCommandExpectedRevision": "ApprovalJobs.RequestedRevision",
+    "SubmittedAt": "Immutable initial submission timestamp"
+  },
+  "authorization": {
+    "identitySource": "Immutable OrderCommands.Author email normalized to lower case and trimmed",
+    "rolesSource": "Exact AllowedRoles UPN mapping; no caller supplied role",
+    "automationCommandAuthor": "Must equal AutomationUPN and be mapped Automation",
+    "writes": "Only F01 dispatcher changes business state",
+    "staffInitialOutputs": "Only Pending commands are polled; submitted service-output values never authorize a transition"
+  },
+  "approvalRules": {
+    "mandatoryEveryOrder": true,
+    "customerConsent": "Sales records external consent reference separately; internal approval releases production authorization only after Release",
+    "deadline": "Request UTC + 72 elapsed hours; ResponseAt <= DeadlineUtc; current AwaitingApproval/key/revision must match. An already applied expiry rejects any later queued decision; Owner reviews queue ordering without automatic revival.",
+    "reminder": "At most one per ApprovalKey after 24 hours and before deadline",
+    "snapshot": "Immutable PDF copied at Validate; Release uses the approved snapshot, never current draft"
+  },
+  "reportingRules": {
+    "active": "Status not Completed or Cancelled",
+    "overdue": "Active and DueAt < explicit AsOfUtc",
+    "onTime": "CompletedAt <= DueAt",
+    "sampleAsOfUtc": "2026-10-14T12:00:00Z"
+  },
+  "qc": "Failure loops through manual production rework and QC; no extra business transition until Complete",
+  "technicalFailure": "Command/job/outbox NeedsReview plus incident; preserve business Status",
+  "cancellation": "Only listed preproduction states; AwaitingApproval and InProduction cancellation excluded"
+}

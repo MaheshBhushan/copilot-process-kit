@@ -1,0 +1,13 @@
+UserKey,UPN,Role,EligiblePilot
+U01,u01@example.invalid,Sales,true
+U02,u02@example.invalid,Sales,true
+U03,u03@example.invalid,Sales,true
+U04,u04@example.invalid,Prepress,true
+U05,u05@example.invalid,Prepress,true
+U06,u06@example.invalid,Approver,true
+U07,u07@example.invalid,Approver,true
+U08,u08@example.invalid,Production,true
+U09,u09@example.invalid,Production,true
+U10,u10@example.invalid,Production,true
+U11,u11@example.invalid,Owner,true
+U12,u12@example.invalid,Owner,true

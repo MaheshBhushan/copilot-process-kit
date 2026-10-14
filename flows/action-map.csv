@@ -1,0 +1,97 @@
+Flow,ActionId,ActionName,NativeAction,ContractRefs,BPMNRefs,Spec
+F01,F01_Poll_commands,Poll_commands,Schedule / Recurrence,OrderCommands.ProcessingState,Task_RecordOrder,flows/F01-dispatcher.md
+F01,F01_Config,Config,Data Operations / Compose,,,flows/F01-dispatcher.md
+F01,F01_Automation_enabled,Automation_enabled,Control / Condition,,,flows/F01-dispatcher.md
+F01,F01_Get_commands,Get_commands,SharePoint / Get items,OrderCommands.ProcessingState,,flows/F01-dispatcher.md
+F01,F01_For_each_command,For_each_command,Control / Apply to each,OrderCommands.ID,,flows/F01-dispatcher.md
+F01,F01_Get_command,Get_command,SharePoint / Get item,OrderCommands.ID,,flows/F01-dispatcher.md
+F01,F01_Command,Command,Data Operations / Compose,OrderCommands.CommandType;OrderCommands.PayloadJson,,flows/F01-dispatcher.md
+F01,F01_Still_pending,Still_pending,Control / Condition,OrderCommands.ProcessingState,,flows/F01-dispatcher.md
+F01,F01_Read_command_ETag,Read_command_ETag,SharePoint / Send an HTTP request to SharePoint,OrderCommands.ProcessingState,,flows/F01-dispatcher.md
+F01,F01_Claim_command,Claim_command,SharePoint / Send an HTTP request to SharePoint,OrderCommands.ProcessingState;OrderCommands.ProcessingStartedAt,,flows/F01-dispatcher.md
+F01,F01_Author_email,Author_email,Data Operations / Compose,OrderCommands.Author,,flows/F01-dispatcher.md
+F01,F01_ActorUPN,ActorUPN,Data Operations / Compose,OrderCommands.Author,,flows/F01-dispatcher.md
+F01,F01_Actor_roles,Actor_roles,Data Operations / Compose,OrderCommands.Author,,flows/F01-dispatcher.md
+F01,F01_Validate_identifiers,Validate_identifiers,Control / Scope,OrderCommands.RequestKey;OrderCommands.OrderKey;OrderCommands.ExpectedRevision;OrderCommands.ApprovalKey,,flows/F01-dispatcher.md
+F01,F01_Set_command_identity,Set_command_identity,Variables / Set variable,OrderCommands.ID;Orders.OrderKey,,flows/F01-dispatcher.md
+F01,F01_Get_order_barrier,Get_order_barrier,SharePoint / Get items,OrderCommands.OrderKey;OrderCommands.ProcessingState,,flows/F01-dispatcher.md
+F01,F01_Get_order,Get_order,SharePoint / Get items,Orders.OrderKey,,flows/F01-dispatcher.md
+F01,F01_Order,Order,Data Operations / Compose,Orders.LastCommandKey;Orders.Revision;Orders.Status,,flows/F01-dispatcher.md
+F01,F01_Get_decision_job,Get_decision_job,SharePoint / Get items,ApprovalJobs.ApprovalKey;ApprovalJobs.RequestedRevision;ApprovalJobs.Outcome;ApprovalJobs.ResponseUPN;ApprovalJobs.ResponseAt,Task_InternalApproval,flows/F01-dispatcher.md
+F01,F01_Job,Job,Data Operations / Compose,ApprovalJobs.DeadlineUtc;ApprovalJobs.AssignedUPN,,flows/F01-dispatcher.md
+F01,F01_Get_queued_decisions,Get_queued_decisions,SharePoint / Get items,OrderCommands.RequestKey;OrderCommands.ResponseAt,Task_RecordExpiry,flows/F01-dispatcher.md
+F01,F01_Authorize_and_guard,Authorize_and_guard,Control / Condition,OrderCommands.CommandType;OrderCommands.ExpectedRevision;Orders.Status;Orders.Revision,Gateway_OrderValid,flows/F01-dispatcher.md
+F01,F01_Build_plan,Build_plan,Control / Switch,Orders.Revision;Orders.LastCommandKey,,flows/F01-dispatcher.md
+F01,F01_Get_draft_before,Get_draft_before,SharePoint / Get file metadata using path,OrderCommands.DraftFilePath;OrderCommands.PreflightChecklistRef;OrderCommands.CustomerConsentRef,Task_Preflight,flows/F01-dispatcher.md
+F01,F01_Copy_snapshot,Copy_snapshot,SharePoint / Copy file (deprecated),Orders.ApprovalSnapshotPath;ApprovalJobs.ApprovalSnapshotPath,Task_RequestApproval,flows/F01-dispatcher.md
+F01,F01_Get_draft_after,Get_draft_after,SharePoint / Get file metadata using path,OrderCommands.DraftFilePath,Task_RequestApproval,flows/F01-dispatcher.md
+F01,F01_Get_approved_job,Get_approved_job,SharePoint / Get items,ApprovalJobs.ApprovalKey;ApprovalJobs.RequestedRevision;ApprovalJobs.Outcome;OrderEvents.CommandID,Task_ReleaseArtwork,flows/F01-dispatcher.md
+F01,F01_Get_snapshot,Get_snapshot,SharePoint / Get file metadata using path,Orders.ApprovalSnapshotPath;ApprovalJobs.ApprovalSnapshotPath,Task_ReleaseArtwork,flows/F01-dispatcher.md
+F01,F01_Copy_release,Copy_release,SharePoint / Copy file (deprecated),Orders.ReleasedFilePath;Orders.ApprovalKey,Task_ReleaseArtwork,flows/F01-dispatcher.md
+F01,F01_Get_release_metadata,Get_release_metadata,SharePoint / Get file metadata using path,Orders.ReleasedFilePath,Task_ReleaseArtwork,flows/F01-dispatcher.md
+F01,F01_Write_receipt,Write_receipt,SharePoint / Send an HTTP request to SharePoint,OrderCommands.PayloadJson;OrderCommands.OrderKey,,flows/F01-dispatcher.md
+F01,F01_Read_order_ETag,Read_order_ETag,SharePoint / Send an HTTP request to SharePoint,Orders.Status;Orders.Revision;Orders.LastCommandKey,,flows/F01-dispatcher.md
+F01,F01_Create_order,Create_order,SharePoint / Create item,Orders.OrderKey;Orders.SalesUPN;Orders.SubmittedAt,Task_RecordOrder,flows/F01-dispatcher.md
+F01,F01_Commit_order,Commit_order,SharePoint / Send an HTTP request to SharePoint,Orders.Status;Orders.Revision;Orders.LastCommandKey,,flows/F01-dispatcher.md
+F01,F01_Ensure_event,Ensure_event,SharePoint / Create item,OrderEvents.EventKey;OrderEvents.CommandID;OrderEvents.EventAt,,flows/F01-dispatcher.md
+F01,F01_Ensure_job,Ensure_job,SharePoint / Create item,ApprovalJobs.ApprovalKey;ApprovalJobs.JobState,Task_RequestApproval,flows/F01-dispatcher.md
+F01,F01_Ensure_outbox,Ensure_outbox,Control / Apply to each,Outbox.MessageKey;Outbox.SafePayload,,flows/F01-dispatcher.md
+F01,F01_Mark_applied,Mark_applied,SharePoint / Send an HTTP request to SharePoint,OrderCommands.ProcessingState;OrderCommands.AppliedRevision;OrderCommands.ProcessedAt,,flows/F01-dispatcher.md
+F01,F01_Reject_command,Reject_command,SharePoint / Send an HTTP request to SharePoint,OrderCommands.ErrorCode;OrderCommands.ProcessingState,,flows/F01-dispatcher.md
+F01,F01_Review_command,Review_command,SharePoint / Send an HTTP request to SharePoint,OrderCommands.ProcessingState;OrderCommands.ErrorDetail,,flows/F01-dispatcher.md
+F02,F02_Job_created,Job_created,SharePoint / When an item is created,ApprovalJobs.JobState,Task_RequestApproval,flows/F02-approval-worker.md
+F02,F02_Config,Config,Data Operations / Compose,,,flows/F02-approval-worker.md
+F02,F02_Read_job_ETag,Read_job_ETag,SharePoint / Send an HTTP request to SharePoint,ApprovalJobs.ID;ApprovalJobs.JobState,,flows/F02-approval-worker.md
+F02,F02_Job,Job,Data Operations / Compose,ApprovalJobs.ApprovalKey,,flows/F02-approval-worker.md
+F02,F02_Job_ETag,Job_ETag,Data Operations / Compose,ApprovalJobs.JobState,,flows/F02-approval-worker.md
+F02,F02_Job_author_email,Job_author_email,Data Operations / Compose,ApprovalJobs.Author,,flows/F02-approval-worker.md
+F02,F02_Get_order,Get_order,SharePoint / Get items,Orders.OrderKey,,flows/F02-approval-worker.md
+F02,F02_Order,Order,Data Operations / Compose,Orders.Status;Orders.Revision,,flows/F02-approval-worker.md
+F02,F02_Guard_job,Guard_job,Control / Condition,ApprovalJobs.JobState;ApprovalJobs.RequestedRevision;ApprovalJobs.AssignedUPN;ApprovalJobs.DeadlineUtc;Orders.ApprovalKey,Task_InternalApproval,flows/F02-approval-worker.md
+F02,F02_Claim_job,Claim_job,SharePoint / Send an HTTP request to SharePoint,ApprovalJobs.JobState;ApprovalJobs.StartedAt,,flows/F02-approval-worker.md
+F02,F02_Create_approval,Create_approval,Standard approvals / Create an approval,ApprovalJobs.AssignedUPN;ApprovalJobs.ApprovalSnapshotPath,Task_InternalApproval,flows/F02-approval-worker.md
+F02,F02_Approval_id,Approval_id,Data Operations / Compose,ApprovalJobs.ApprovalId,,flows/F02-approval-worker.md
+F02,F02_Persist_approval,Persist_approval,SharePoint / Send an HTTP request to SharePoint,ApprovalJobs.ApprovalId;ApprovalJobs.JobState,,flows/F02-approval-worker.md
+F02,F02_Wait_approval,Wait_approval,Standard approvals / Wait for an approval,ApprovalJobs.ApprovalId;ApprovalJobs.DeadlineUtc,Task_InternalApproval,flows/F02-approval-worker.md
+F02,F02_Response_outcome,Response_outcome,Data Operations / Compose,ApprovalJobs.Outcome,Gateway_ApprovalOutcome,flows/F02-approval-worker.md
+F02,F02_Response_upn,Response_upn,Data Operations / Compose,ApprovalJobs.ResponseUPN,,flows/F02-approval-worker.md
+F02,F02_Response_at,Response_at,Data Operations / Compose,ApprovalJobs.ResponseAt,,flows/F02-approval-worker.md
+F02,F02_Response_reason,Response_reason,Data Operations / Compose,OrderCommands.Reason,,flows/F02-approval-worker.md
+F02,F02_Persist_response,Persist_response,SharePoint / Send an HTTP request to SharePoint,ApprovalJobs.Outcome;ApprovalJobs.ResponseUPN;ApprovalJobs.ResponseAt,,flows/F02-approval-worker.md
+F02,F02_Get_current_order,Get_current_order,SharePoint / Get items,Orders.Status;Orders.Revision;Orders.ApprovalKey,,flows/F02-approval-worker.md
+F02,F02_Ensure_decision_command,Ensure_decision_command,SharePoint / Create item,OrderCommands.RequestKey;OrderCommands.CommandType;OrderCommands.ResponseAt,,flows/F02-approval-worker.md
+F02,F02_Mark_decision_queued,Mark_decision_queued,SharePoint / Send an HTTP request to SharePoint,ApprovalJobs.JobState;ApprovalJobs.FinishedAt,,flows/F02-approval-worker.md
+F02,F02_Ensure_expiry_command,Ensure_expiry_command,SharePoint / Create item,OrderCommands.RequestKey;OrderCommands.ApprovalKey,Task_RecordExpiry,flows/F02-approval-worker.md
+F02,F02_Mark_expired,Mark_expired,SharePoint / Send an HTTP request to SharePoint,ApprovalJobs.JobState,Task_RecordExpiry,flows/F02-approval-worker.md
+F02,F02_Review_job,Review_job,SharePoint / Send an HTTP request to SharePoint,ApprovalJobs.JobState;ApprovalJobs.ErrorDetail,,flows/F02-approval-worker.md
+F03,F03_Poll_outbox,Poll_outbox,Schedule / Recurrence,Outbox.DeliveryState,,flows/F03-notification-worker.md
+F03,F03_Config,Config,Data Operations / Compose,,,flows/F03-notification-worker.md
+F03,F03_Get_outbox,Get_outbox,SharePoint / Get items,Outbox.DeliveryState,,flows/F03-notification-worker.md
+F03,F03_For_each_message,For_each_message,Control / Apply to each,Outbox.ID,,flows/F03-notification-worker.md
+F03,F03_Get_message,Get_message,SharePoint / Get item,Outbox.Author,,flows/F03-notification-worker.md
+F03,F03_Message,Message,Data Operations / Compose,Outbox.SafePayload;Outbox.Channel,,flows/F03-notification-worker.md
+F03,F03_Guard_message,Guard_message,Control / Condition,Outbox.Recipient;Outbox.TemplateKey,,flows/F03-notification-worker.md
+F03,F03_Read_outbox_ETag,Read_outbox_ETag,SharePoint / Send an HTTP request to SharePoint,Outbox.DeliveryState,,flows/F03-notification-worker.md
+F03,F03_Claim_message,Claim_message,SharePoint / Send an HTTP request to SharePoint,Outbox.DeliveryState;Outbox.AttemptCount;Outbox.LastAttemptAt,,flows/F03-notification-worker.md
+F03,F03_Choose_channel,Choose_channel,Control / Switch,Outbox.Channel,,flows/F03-notification-worker.md
+F03,F03_Send_email,Send_email,Office 365 Outlook / Send an email (V2),Outbox.Recipient;Outbox.TemplateKey,,flows/F03-notification-worker.md
+F03,F03_Post_teams,Post_teams,Microsoft Teams / Post message in a chat or channel,Outbox.Recipient;Outbox.TemplateKey,,flows/F03-notification-worker.md
+F03,F03_Mark_sent,Mark_sent,SharePoint / Send an HTTP request to SharePoint,Outbox.DeliveryState;Outbox.DeliveredAt;Outbox.ProviderReference,,flows/F03-notification-worker.md
+F03,F03_Review_delivery,Review_delivery,SharePoint / Send an HTTP request to SharePoint,Outbox.DeliveryState;Outbox.ErrorDetail,,flows/F03-notification-worker.md
+F04,F04_Watch_schedule,Watch_schedule,Schedule / Recurrence,,,flows/F04-watchdog.md
+F04,F04_Config,Config,Data Operations / Compose,,,flows/F04-watchdog.md
+F04,F04_Watch_time,Watch_time,Data Operations / Compose,,,flows/F04-watchdog.md
+F04,F04_Get_waiting,Get_waiting,SharePoint / Get items,ApprovalJobs.JobState;ApprovalJobs.DeadlineUtc,Task_InternalApproval,flows/F04-watchdog.md
+F04,F04_For_each_waiting,For_each_waiting,Control / Apply to each,ApprovalJobs.JobState,,flows/F04-watchdog.md
+F04,F04_Get_current_order,Get_current_order,SharePoint / Get items,Orders.Status;Orders.Revision;Orders.ApprovalKey,,flows/F04-watchdog.md
+F04,F04_Choose_deadline_path,Choose_deadline_path,Control / Condition,ApprovalJobs.DeadlineUtc,Task_RecordExpiry,flows/F04-watchdog.md
+F04,F04_Ensure_watch_expiry,Ensure_watch_expiry,SharePoint / Create item,OrderCommands.RequestKey;OrderCommands.ExpectedRevision;OrderCommands.ApprovalKey,Task_RecordExpiry,flows/F04-watchdog.md
+F04,F04_Ensure_reminders,Ensure_reminders,Control / Apply to each,Outbox.MessageKey;Outbox.TemplateKey,Task_InternalApproval,flows/F04-watchdog.md
+F04,F04_Get_unstarted_jobs,Get_unstarted_jobs,SharePoint / Get items,ApprovalJobs.JobState;ApprovalJobs.DeadlineUtc,,flows/F04-watchdog.md
+F04,F04_Get_processing,Get_processing,SharePoint / Get items,OrderCommands.ProcessingState;OrderCommands.ProcessingStartedAt,,flows/F04-watchdog.md
+F04,F04_Get_creating,Get_creating,SharePoint / Get items,ApprovalJobs.JobState;ApprovalJobs.StartedAt,,flows/F04-watchdog.md
+F04,F04_Get_sending,Get_sending,SharePoint / Get items,Outbox.DeliveryState;Outbox.LastAttemptAt,,flows/F04-watchdog.md
+F04,F04_For_each_stale,For_each_stale,Control / Apply to each,OrderCommands.ProcessingState;ApprovalJobs.JobState;Outbox.DeliveryState,,flows/F04-watchdog.md
+F04,F04_Mark_stale_review,Mark_stale_review,SharePoint / Send an HTTP request to SharePoint,OrderCommands.ProcessingState;ApprovalJobs.JobState;Outbox.DeliveryState,,flows/F04-watchdog.md
+F04,F04_Ensure_incident,Ensure_incident,SharePoint / Create item,Outbox.MessageKey;Outbox.Recipient;Outbox.TemplateKey,,flows/F04-watchdog.md
+F04,F04_Watch_failure,Watch_failure,Control / Scope,,,flows/F04-watchdog.md

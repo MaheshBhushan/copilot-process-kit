@@ -1,0 +1,47 @@
+{
+  "ContractVersion": "1.0",
+  "TenantDomain": "example.invalid",
+  "SiteUrl": "https://example.invalid/sites/print-pilot",
+  "EnvironmentId": "REPLACE-ENVIRONMENT-ID",
+  "SolutionName": "CopilotProcessKit",
+  "OrdersListId": "REPLACE-ORDERS-GUID",
+  "CommandsListId": "REPLACE-COMMANDS-GUID",
+  "ApprovalJobsListId": "REPLACE-APPROVALJOBS-GUID",
+  "EventsListId": "REPLACE-EVENTS-GUID",
+  "OutboxListId": "REPLACE-OUTBOX-GUID",
+  "TeamId": "REPLACE-TEAM-ID",
+  "ChannelId": "REPLACE-CHANNEL-ID",
+  "AutomationUPN": "automation@example.invalid",
+  "OwnerUPN": "owner@example.invalid",
+  "AllowedRoles": {
+    "sales@example.invalid": [
+      "Sales"
+    ],
+    "prepress@example.invalid": [
+      "Prepress"
+    ],
+    "approver@example.invalid": [
+      "Approver"
+    ],
+    "production@example.invalid": [
+      "Production"
+    ],
+    "owner@example.invalid": [
+      "Owner"
+    ],
+    "automation@example.invalid": [
+      "Automation"
+    ]
+  },
+  "LibraryPaths": {
+    "DraftArtwork": "/sites/print-pilot/DraftArtwork",
+    "ProductionFiles": "/sites/print-pilot/ProductionFiles",
+    "ApprovalSnapshots": "/sites/print-pilot/ProductionFiles/ApprovalSnapshots",
+    "ProcessKnowledge": "/sites/print-pilot/ProcessKnowledge"
+  },
+  "ApprovalTimeoutHours": 72,
+  "ReminderHours": 24,
+  "DispatcherBatchSize": 25,
+  "EnableNotifications": false,
+  "EnableAutomation": false
+}

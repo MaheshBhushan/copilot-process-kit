@@ -1,0 +1,341 @@
+{
+  "kit": "Copilot Process Kit",
+  "version": "1.0",
+  "contractVersion": "1.0",
+  "localStatus": "Implemented; see validation/local-report.md",
+  "tenantStatus": "Pending",
+  "powerBIRuntimeStatus": "Pending",
+  "sampleAsOfUtc": "2026-10-14T12:00:00Z",
+  "excludedArtifacts": [
+    "No PBIX or fabricated solution export",
+    "No live tenant IDs or credentials",
+    "No automatic live usage feed"
+  ],
+  "deploymentHold": "Required deprecated Copy file action unavailable or lacking explicit filename/no-overwrite: HOLD until approved tested replacement",
+  "artifacts": [
+    {
+      "path": ".gitignore",
+      "class": "Package index",
+      "status": "Local artifact",
+      "purpose": ".gitignore"
+    },
+    {
+      "path": "README.md",
+      "class": "Package index",
+      "status": "Local artifact",
+      "purpose": "README"
+    },
+    {
+      "path": "config/environment.example.json",
+      "class": "Example configuration",
+      "status": "Local artifact",
+      "purpose": "environment.example"
+    },
+    {
+      "path": "contracts/process.json",
+      "class": "Source contract",
+      "status": "Local artifact",
+      "purpose": "process"
+    },
+    {
+      "path": "contracts/sharepoint-schema.json",
+      "class": "Source contract",
+      "status": "Local artifact",
+      "purpose": "sharepoint schema"
+    },
+    {
+      "path": "copilot/agent-instructions.md",
+      "class": "Agent specification",
+      "status": "Local source; tenant execution Pending",
+      "purpose": "agent instructions"
+    },
+    {
+      "path": "copilot/evaluation-cases.csv",
+      "class": "Agent specification",
+      "status": "Local source; tenant execution Pending",
+      "purpose": "evaluation cases"
+    },
+    {
+      "path": "copilot/setup-guide.md",
+      "class": "Agent specification",
+      "status": "Local source; tenant execution Pending",
+      "purpose": "setup guide"
+    },
+    {
+      "path": "data/OrderEvents.csv",
+      "class": "Synthetic fixture",
+      "status": "Local artifact",
+      "purpose": "OrderEvents"
+    },
+    {
+      "path": "data/Orders.csv",
+      "class": "Synthetic fixture",
+      "status": "Local artifact",
+      "purpose": "Orders"
+    },
+    {
+      "path": "data/README.md",
+      "class": "Synthetic fixture",
+      "status": "Local artifact",
+      "purpose": "README"
+    },
+    {
+      "path": "data/Usage.csv",
+      "class": "Synthetic fixture",
+      "status": "Local artifact",
+      "purpose": "Usage"
+    },
+    {
+      "path": "data/Users.csv",
+      "class": "Synthetic fixture",
+      "status": "Local artifact",
+      "purpose": "Users"
+    },
+    {
+      "path": "data/expected-metrics.json",
+      "class": "Synthetic fixture",
+      "status": "Local artifact",
+      "purpose": "expected metrics"
+    },
+    {
+      "path": "data/scenarios.csv",
+      "class": "Synthetic fixture",
+      "status": "Local artifact",
+      "purpose": "scenarios"
+    },
+    {
+      "path": "deployment/acceptance-cases.csv",
+      "class": "Tenant setup and acceptance",
+      "status": "Local source; tenant execution Pending",
+      "purpose": "acceptance cases"
+    },
+    {
+      "path": "deployment/evidence-template.md",
+      "class": "Tenant setup and acceptance",
+      "status": "Local source; tenant execution Pending",
+      "purpose": "evidence template"
+    },
+    {
+      "path": "deployment/runbook.md",
+      "class": "Tenant setup and acceptance",
+      "status": "Local source; tenant execution Pending",
+      "purpose": "runbook"
+    },
+    {
+      "path": "flows/F01-dispatcher.md",
+      "class": "Native reconstruction guide",
+      "status": "Local source; tenant execution Pending",
+      "purpose": "F01 dispatcher"
+    },
+    {
+      "path": "flows/F02-approval-worker.md",
+      "class": "Native reconstruction guide",
+      "status": "Local source; tenant execution Pending",
+      "purpose": "F02 approval worker"
+    },
+    {
+      "path": "flows/F03-notification-worker.md",
+      "class": "Native reconstruction guide",
+      "status": "Local source; tenant execution Pending",
+      "purpose": "F03 notification worker"
+    },
+    {
+      "path": "flows/F04-watchdog.md",
+      "class": "Native reconstruction guide",
+      "status": "Local source; tenant execution Pending",
+      "purpose": "F04 watchdog"
+    },
+    {
+      "path": "flows/README.md",
+      "class": "Native reconstruction guide",
+      "status": "Local source; tenant execution Pending",
+      "purpose": "README"
+    },
+    {
+      "path": "flows/action-map.csv",
+      "class": "Native reconstruction guide",
+      "status": "Local source; tenant execution Pending",
+      "purpose": "action map"
+    },
+    {
+      "path": "flows/expressions.md",
+      "class": "Native reconstruction guide",
+      "status": "Local source; tenant execution Pending",
+      "purpose": "expressions"
+    },
+    {
+      "path": "knowledge/01-order-lifecycle.md",
+      "class": "Grounding source",
+      "status": "Local artifact",
+      "purpose": "01 order lifecycle"
+    },
+    {
+      "path": "knowledge/02-approval-and-exceptions.md",
+      "class": "Grounding source",
+      "status": "Local artifact",
+      "purpose": "02 approval and exceptions"
+    },
+    {
+      "path": "knowledge/03-artwork-and-quality.md",
+      "class": "Grounding source",
+      "status": "Local artifact",
+      "purpose": "03 artwork and quality"
+    },
+    {
+      "path": "knowledge/04-roles-and-service-levels.md",
+      "class": "Grounding source",
+      "status": "Local artifact",
+      "purpose": "04 roles and service levels"
+    },
+    {
+      "path": "manifest.json",
+      "class": "Package index",
+      "status": "Local artifact",
+      "purpose": "Complete delivery inventory"
+    },
+    {
+      "path": "process/print-order.bpmn",
+      "class": "Process source",
+      "status": "Local artifact",
+      "purpose": "print order"
+    },
+    {
+      "path": "process/print-order.svg",
+      "class": "Process source",
+      "status": "Local artifact",
+      "purpose": "print order"
+    },
+    {
+      "path": "process/process-guide.md",
+      "class": "Process source",
+      "status": "Local artifact",
+      "purpose": "process guide"
+    },
+    {
+      "path": "reporting/approval-facts.pq",
+      "class": "Report source",
+      "status": "Local source; tenant execution Pending",
+      "purpose": "approval facts"
+    },
+    {
+      "path": "reporting/dashboard-layout.md",
+      "class": "Report source",
+      "status": "Local source; tenant execution Pending",
+      "purpose": "dashboard layout"
+    },
+    {
+      "path": "reporting/local-sources.pq",
+      "class": "Report source",
+      "status": "Local source; tenant execution Pending",
+      "purpose": "local sources"
+    },
+    {
+      "path": "reporting/measures.dax",
+      "class": "Report source",
+      "status": "Local source; tenant execution Pending",
+      "purpose": "measures"
+    },
+    {
+      "path": "reporting/prepare.pq",
+      "class": "Report source",
+      "status": "Local source; tenant execution Pending",
+      "purpose": "prepare"
+    },
+    {
+      "path": "reporting/setup-guide.md",
+      "class": "Report source",
+      "status": "Local source; tenant execution Pending",
+      "purpose": "setup guide"
+    },
+    {
+      "path": "reporting/sharepoint-sources.pq",
+      "class": "Report source",
+      "status": "Local source; tenant execution Pending",
+      "purpose": "sharepoint sources"
+    },
+    {
+      "path": "rollout/change-plan.md",
+      "class": "Rollout source",
+      "status": "Local artifact",
+      "purpose": "change plan"
+    },
+    {
+      "path": "rollout/communications.md",
+      "class": "Rollout source",
+      "status": "Local artifact",
+      "purpose": "communications"
+    },
+    {
+      "path": "scripts/generate_samples.py",
+      "class": "Local executable",
+      "status": "Local artifact",
+      "purpose": "generate samples"
+    },
+    {
+      "path": "scripts/validate.py",
+      "class": "Local executable",
+      "status": "Local artifact",
+      "purpose": "validate"
+    },
+    {
+      "path": "sharepoint/permissions-matrix.csv",
+      "class": "Manual setup",
+      "status": "Local source; tenant execution Pending",
+      "purpose": "permissions matrix"
+    },
+    {
+      "path": "sharepoint/provisioning-guide.md",
+      "class": "Manual setup",
+      "status": "Local source; tenant execution Pending",
+      "purpose": "provisioning guide"
+    },
+    {
+      "path": "training/approver-guide.md",
+      "class": "Training source",
+      "status": "Local artifact",
+      "purpose": "approver guide"
+    },
+    {
+      "path": "training/owner-admin-guide.md",
+      "class": "Training source",
+      "status": "Local artifact",
+      "purpose": "owner admin guide"
+    },
+    {
+      "path": "training/prepress-guide.md",
+      "class": "Training source",
+      "status": "Local artifact",
+      "purpose": "prepress guide"
+    },
+    {
+      "path": "training/production-guide.md",
+      "class": "Training source",
+      "status": "Local artifact",
+      "purpose": "production guide"
+    },
+    {
+      "path": "training/prompt-library.md",
+      "class": "Training source",
+      "status": "Local artifact",
+      "purpose": "prompt library"
+    },
+    {
+      "path": "training/sales-guide.md",
+      "class": "Training source",
+      "status": "Local artifact",
+      "purpose": "sales guide"
+    },
+    {
+      "path": "validation/determinism.json",
+      "class": "Observed local evidence",
+      "status": "Local artifact",
+      "purpose": "determinism"
+    },
+    {
+      "path": "validation/local-report.md",
+      "class": "Observed local evidence",
+      "status": "Local artifact",
+      "purpose": "local report"
+    }
+  ]
+}

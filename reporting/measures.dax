@@ -1,0 +1,70 @@
+// Create each table/measure separately in Power BI Desktop. All model datetimes represent UTC.
+AsOf = ROW("AsOfUtc", DATE(2026, 10, 14) + TIME(12, 0, 0))
+
+Date =
+VAR FactDates = UNION(
+    SELECTCOLUMNS(Orders, "D", Orders[SubmittedDate]),
+    SELECTCOLUMNS(Orders, "D", Orders[CompletedDate]),
+    SELECTCOLUMNS(Orders, "D", INT(Orders[DueAt])),
+    SELECTCOLUMNS(Events, "D", Events[EventDate]),
+    SELECTCOLUMNS(Usage, "D", Usage[EventDate]))
+VAR PresentDates = FILTER(FactDates, NOT ISBLANK([D]))
+RETURN ADDCOLUMNS(CALENDAR(MINX(PresentDates, [D]), MAXX(PresentDates, [D])),
+    "WeekStart", [Date] - WEEKDAY([Date], 2) + 1,
+    "WeekLabel", FORMAT([Date] - WEEKDAY([Date], 2) + 1, "yyyy-MM-dd"))
+
+Total Orders = DISTINCTCOUNT(Orders[OrderKey])
+
+Completed Orders = CALCULATE([Total Orders], KEEPFILTERS(Orders[Status] = "Completed"))
+
+Active Orders = CALCULATE([Total Orders], KEEPFILTERS(NOT Orders[Status] IN {"Completed", "Cancelled"}))
+
+Completion Rate = DIVIDE([Completed Orders], [Total Orders])
+
+On-time Eligible Orders = COUNTROWS(FILTER(Orders,
+    Orders[Status] = "Completed" && NOT ISBLANK(Orders[CompletedAt]) && NOT ISBLANK(Orders[DueAt])))
+
+On-time Completed Orders = COUNTROWS(FILTER(Orders,
+    Orders[Status] = "Completed" && NOT ISBLANK(Orders[CompletedAt]) && NOT ISBLANK(Orders[DueAt])
+    && Orders[CompletedAt] <= Orders[DueAt]))
+
+On-time Completion % = DIVIDE([On-time Completed Orders], [On-time Eligible Orders])
+
+Average Cycle Hours = AVERAGEX(FILTER(Orders, Orders[Status] = "Completed"
+    && NOT ISBLANK(Orders[SubmittedAt]) && NOT ISBLANK(Orders[CompletedAt])),
+    (Orders[CompletedAt] - Orders[SubmittedAt]) * 24)
+
+Approval Turnaround Hours = AVERAGE(ApprovalFacts[ApprovalHours])
+
+Administrative Rework Orders = CALCULATE(DISTINCTCOUNT(Events[OrderKey]), KEEPFILTERS(Events[ToStatus] = "ChangesRequested"))
+
+Rework Rate = DIVIDE([Administrative Rework Orders], [Total Orders])
+
+Active Overdue =
+VAR Cutoff = SELECTEDVALUE(AsOf[AsOfUtc])
+RETURN IF(ISBLANK(Cutoff), BLANK(), COUNTROWS(FILTER(Orders,
+    NOT Orders[Status] IN {"Completed", "Cancelled"} && NOT ISBLANK(Orders[DueAt]) && Orders[DueAt] < Cutoff)))
+
+Weekly Agent Users = CALCULATE(DISTINCTCOUNT(Usage[UserKey]), KEEPFILTERS(Usage[ActivityType] = "AgentSession"))
+
+Agent Sessions = CALCULATE(COUNTROWS(Usage), KEEPFILTERS(Usage[ActivityType] = "AgentSession"))
+
+Eligible Pilot Users = CALCULATE(DISTINCTCOUNT(Users[UserKey]), KEEPFILTERS(Users[EligiblePilot] = TRUE()))
+
+Training Completed Users =
+VAR EligibleKeys = CALCULATETABLE(VALUES(Users[UserKey]), KEEPFILTERS(Users[EligiblePilot] = TRUE()))
+RETURN CALCULATE(DISTINCTCOUNT(Usage[UserKey]), KEEPFILTERS(Usage[ActivityType] = "TrainingCompleted"),
+    KEEPFILTERS(Usage[Outcome] = "Success"), KEEPFILTERS(TREATAS(EligibleKeys, Usage[UserKey])))
+
+Training Completion % = DIVIDE([Training Completed Users], [Eligible Pilot Users])
+
+// For a COMPLETION-date trend: disable the submitted-date relationship in this calculation.
+Completed by Completion Date = CALCULATE([Completed Orders],
+    CROSSFILTER('Date'[Date], Orders[SubmittedDate], NONE),
+    USERELATIONSHIP('Date'[Date], Orders[CompletedDate]))
+
+Cycle Hours by Completion Date = CALCULATE([Average Cycle Hours],
+    CROSSFILTER('Date'[Date], Orders[SubmittedDate], NONE),
+    USERELATIONSHIP('Date'[Date], Orders[CompletedDate]))
+
+Approval Expiry Events = CALCULATE(COUNTROWS(Events), KEEPFILTERS(Events[EventType] = "ApprovalExpired"))

@@ -1,0 +1,1524 @@
+{
+  "contractVersion": "1.0",
+  "notes": [
+    "Writers describe intended service/form use, not column-level security. SharePoint cannot enforce column writer permissions. Lists enforce item-level grants.",
+    "All timestamps are Date and Time values stored in UTC, displayed by site/user locale.",
+    "ID, Created, Modified, Author and Editor are SharePoint system columns. Author is immutable to ordinary staff.",
+    "Null default means no default value. All custom Note columns use plain text.",
+    "Required fields are unconditional SharePoint requirements; process.json adds command/state-specific requirements."
+  ],
+  "lists": {
+    "Orders": {
+      "versionHistory": true,
+      "staffAccess": "Read",
+      "serviceAccess": "Edit",
+      "fields": [
+        {
+          "internalName": "Title",
+          "type": "Text",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ],
+          "maxLength": 120
+        },
+        {
+          "internalName": "OrderKey",
+          "type": "Text",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": true,
+          "unique": true,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "Status",
+          "type": "Choice",
+          "required": true,
+          "default": "Submitted",
+          "choices": [
+            "Submitted",
+            "ChangesRequested",
+            "AwaitingApproval",
+            "Approved",
+            "ApprovalExpired",
+            "ReadyForProduction",
+            "InProduction",
+            "Completed",
+            "Cancelled"
+          ],
+          "indexed": true,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "Revision",
+          "type": "Number",
+          "required": true,
+          "default": 1,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ],
+          "integer": true
+        },
+        {
+          "internalName": "CustomerCode",
+          "type": "Text",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "ProductType",
+          "type": "Choice",
+          "required": true,
+          "default": null,
+          "choices": [
+            "BusinessCards",
+            "Flyers",
+            "Posters",
+            "Booklets"
+          ],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "Quantity",
+          "type": "Number",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ],
+          "integer": true,
+          "minimum": 1,
+          "maximum": 100000
+        },
+        {
+          "internalName": "QuoteEUR",
+          "type": "Currency",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ],
+          "currency": "EUR",
+          "decimalPlaces": 2
+        },
+        {
+          "internalName": "DueAt",
+          "type": "DateTime",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "SubmittedAt",
+          "type": "DateTime",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ],
+          "immutable": true
+        },
+        {
+          "internalName": "ApprovalRequestedAt",
+          "type": "DateTime",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "ApprovalDueAt",
+          "type": "DateTime",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": true,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "ApprovedAt",
+          "type": "DateTime",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "ProductionStartedAt",
+          "type": "DateTime",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "CompletedAt",
+          "type": "DateTime",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "CancelledAt",
+          "type": "DateTime",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "SalesUPN",
+          "type": "Text",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "ApproverUPN",
+          "type": "Text",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "ProductionUPN",
+          "type": "Text",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "DraftFilePath",
+          "type": "Text",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "ApprovalSnapshotPath",
+          "type": "Text",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "ReleasedFilePath",
+          "type": "Text",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "CustomerConsentRef",
+          "type": "Text",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "ApprovalKey",
+          "type": "Text",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "LastCommandKey",
+          "type": "Text",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "QCReference",
+          "type": "Text",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "WasteQuantity",
+          "type": "Number",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ],
+          "integer": true,
+          "minimum": 0,
+          "maximum": "Quantity"
+        }
+      ]
+    },
+    "OrderCommands": {
+      "versionHistory": true,
+      "staffAccess": "AddReadOwnCommands",
+      "serviceAccess": "Edit",
+      "fields": [
+        {
+          "internalName": "Title",
+          "type": "Text",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Sales",
+            "Prepress",
+            "Production",
+            "Automation",
+            "Admin"
+          ],
+          "maxLength": 120
+        },
+        {
+          "internalName": "CustomerCode",
+          "type": "Text",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Sales",
+            "Prepress",
+            "Production",
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "ProductType",
+          "type": "Choice",
+          "required": false,
+          "default": null,
+          "choices": [
+            "BusinessCards",
+            "Flyers",
+            "Posters",
+            "Booklets"
+          ],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Sales",
+            "Prepress",
+            "Production",
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "Quantity",
+          "type": "Number",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Sales",
+            "Prepress",
+            "Production",
+            "Automation",
+            "Admin"
+          ],
+          "integer": true,
+          "minimum": 1,
+          "maximum": 100000
+        },
+        {
+          "internalName": "QuoteEUR",
+          "type": "Currency",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Sales",
+            "Prepress",
+            "Production",
+            "Automation",
+            "Admin"
+          ],
+          "currency": "EUR",
+          "decimalPlaces": 2
+        },
+        {
+          "internalName": "DueAt",
+          "type": "DateTime",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Sales",
+            "Prepress",
+            "Production",
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "ApproverUPN",
+          "type": "Text",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Sales",
+            "Prepress",
+            "Production",
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "ProductionUPN",
+          "type": "Text",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Sales",
+            "Prepress",
+            "Production",
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "DraftFilePath",
+          "type": "Text",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Sales",
+            "Prepress",
+            "Production",
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "CustomerConsentRef",
+          "type": "Text",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Sales",
+            "Prepress",
+            "Production",
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "QCReference",
+          "type": "Text",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Sales",
+            "Prepress",
+            "Production",
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "WasteQuantity",
+          "type": "Number",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Sales",
+            "Prepress",
+            "Production",
+            "Automation",
+            "Admin"
+          ],
+          "integer": true,
+          "minimum": 0,
+          "maximum": "Quantity"
+        },
+        {
+          "internalName": "RequestKey",
+          "type": "Text",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": true,
+          "unique": true,
+          "writers": [
+            "Sales",
+            "Prepress",
+            "Production",
+            "Owner",
+            "Automation",
+            "Admin"
+          ],
+          "pattern": "^[A-Za-z0-9-]{1,100}$"
+        },
+        {
+          "internalName": "OrderKey",
+          "type": "Text",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": true,
+          "unique": false,
+          "writers": [
+            "Sales",
+            "Prepress",
+            "Production",
+            "Owner",
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "CommandType",
+          "type": "Choice",
+          "required": true,
+          "default": null,
+          "choices": [
+            "Submit",
+            "Validate",
+            "RequestChanges",
+            "Resubmit",
+            "ApprovalApproved",
+            "ApprovalRejected",
+            "ApprovalExpired",
+            "Release",
+            "StartProduction",
+            "Complete",
+            "Cancel"
+          ],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Sales",
+            "Prepress",
+            "Production",
+            "Owner",
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "ExpectedRevision",
+          "type": "Number",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Sales",
+            "Prepress",
+            "Production",
+            "Owner",
+            "Automation",
+            "Admin"
+          ],
+          "integer": true,
+          "minimum": 1
+        },
+        {
+          "internalName": "PayloadJson",
+          "type": "Note",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ],
+          "plainText": true
+        },
+        {
+          "internalName": "Reason",
+          "type": "Note",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Sales",
+            "Prepress",
+            "Owner",
+            "Automation",
+            "Admin"
+          ],
+          "plainText": true
+        },
+        {
+          "internalName": "PreflightChecklistRef",
+          "type": "Text",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Prepress",
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "ApprovalKey",
+          "type": "Text",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "ResponseUPN",
+          "type": "Text",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "ResponseAt",
+          "type": "DateTime",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "ProcessingState",
+          "type": "Choice",
+          "required": true,
+          "default": "Pending",
+          "choices": [
+            "Pending",
+            "Processing",
+            "Applied",
+            "Rejected",
+            "NeedsReview"
+          ],
+          "indexed": true,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "ProcessingStartedAt",
+          "type": "DateTime",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": true,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "ProcessedAt",
+          "type": "DateTime",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "ErrorCode",
+          "type": "Text",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "ErrorDetail",
+          "type": "Note",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ],
+          "plainText": true
+        },
+        {
+          "internalName": "AppliedRevision",
+          "type": "Number",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ],
+          "integer": true
+        }
+      ]
+    },
+    "ApprovalJobs": {
+      "versionHistory": true,
+      "staffAccess": "None",
+      "serviceAccess": "Edit",
+      "fields": [
+        {
+          "internalName": "Title",
+          "type": "Text",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "ApprovalKey",
+          "type": "Text",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": true,
+          "unique": true,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "OrderKey",
+          "type": "Text",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": true,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "RequestedRevision",
+          "type": "Number",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ],
+          "integer": true
+        },
+        {
+          "internalName": "AssignedUPN",
+          "type": "Text",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "DeadlineUtc",
+          "type": "DateTime",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": true,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "ApprovalId",
+          "type": "Text",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "JobState",
+          "type": "Choice",
+          "required": true,
+          "default": "New",
+          "choices": [
+            "New",
+            "Creating",
+            "Waiting",
+            "DecisionQueued",
+            "Expired",
+            "NeedsReview"
+          ],
+          "indexed": true,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "StartedAt",
+          "type": "DateTime",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": true,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "FinishedAt",
+          "type": "DateTime",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "Outcome",
+          "type": "Text",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "ResponseUPN",
+          "type": "Text",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "ResponseAt",
+          "type": "DateTime",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "ErrorDetail",
+          "type": "Note",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ],
+          "plainText": true
+        },
+        {
+          "internalName": "SnapshotDraftPath",
+          "type": "Text",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "ApprovalSnapshotPath",
+          "type": "Text",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "SnapshotQuoteEUR",
+          "type": "Currency",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ],
+          "currency": "EUR",
+          "decimalPlaces": 2
+        }
+      ]
+    },
+    "OrderEvents": {
+      "versionHistory": true,
+      "staffAccess": "None",
+      "serviceAccess": "AppendOnly",
+      "fields": [
+        {
+          "internalName": "Title",
+          "type": "Text",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "EventKey",
+          "type": "Text",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": true,
+          "unique": true,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "OrderKey",
+          "type": "Text",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": true,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "CommandID",
+          "type": "Number",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ],
+          "integer": true
+        },
+        {
+          "internalName": "FromStatus",
+          "type": "Text",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "ToStatus",
+          "type": "Text",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "Revision",
+          "type": "Number",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ],
+          "integer": true
+        },
+        {
+          "internalName": "EventAt",
+          "type": "DateTime",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": true,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "ActorUPN",
+          "type": "Text",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "Role",
+          "type": "Text",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "EventType",
+          "type": "Text",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "ApprovalKey",
+          "type": "Text",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "DurationHours",
+          "type": "Number",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        }
+      ]
+    },
+    "Outbox": {
+      "versionHistory": true,
+      "staffAccess": "None",
+      "serviceAccess": "Edit",
+      "fields": [
+        {
+          "internalName": "Title",
+          "type": "Text",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "MessageKey",
+          "type": "Text",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": true,
+          "unique": true,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "OrderKey",
+          "type": "Text",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": true,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "Channel",
+          "type": "Choice",
+          "required": true,
+          "default": null,
+          "choices": [
+            "Email",
+            "Teams"
+          ],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "Recipient",
+          "type": "Text",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "TemplateKey",
+          "type": "Text",
+          "required": true,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "SafePayload",
+          "type": "Note",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ],
+          "plainText": true
+        },
+        {
+          "internalName": "DeliveryState",
+          "type": "Choice",
+          "required": true,
+          "default": "Pending",
+          "choices": [
+            "Pending",
+            "Sending",
+            "Sent",
+            "NeedsReview"
+          ],
+          "indexed": true,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "AttemptCount",
+          "type": "Number",
+          "required": true,
+          "default": 0,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ],
+          "integer": true
+        },
+        {
+          "internalName": "LastAttemptAt",
+          "type": "DateTime",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": true,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "DeliveredAt",
+          "type": "DateTime",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "ProviderReference",
+          "type": "Text",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ]
+        },
+        {
+          "internalName": "ErrorDetail",
+          "type": "Note",
+          "required": false,
+          "default": null,
+          "choices": [],
+          "indexed": false,
+          "unique": false,
+          "writers": [
+            "Automation",
+            "Admin"
+          ],
+          "plainText": true
+        }
+      ]
+    }
+  },
+  "libraries": {
+    "DraftArtwork": {
+      "versionHistory": true,
+      "staffAccess": {
+        "Sales": "Contribute",
+        "Prepress": "Edit"
+      },
+      "automationAccess": "Read"
+    },
+    "ProductionFiles": {
+      "versionHistory": true,
+      "staffAccess": {
+        "Production": "Read",
+        "Prepress": "Read",
+        "Sales": "Read",
+        "Approver": "Read",
+        "Owner": "Read"
+      },
+      "automationAccess": "CreateNoOverwrite",
+      "folders": [
+        "ApprovalSnapshots"
+      ],
+      "immutablePolicy": "Staff cannot edit; automation never overwrites deterministic names; admins use audited incident procedure only."
+    },
+    "ProcessKnowledge": {
+      "versionHistory": true,
+      "staffAccess": {
+        "Owner": "Edit",
+        "Sales": "Read",
+        "Prepress": "Read",
+        "Approver": "Read",
+        "Production": "Read"
+      },
+      "automationAccess": "Read",
+      "publish": "Approved guides only; restricted admin test file remains outside shared folder."
+    }
+  },
+  "views": {
+    "Orders": {
+      "Active": "Status != Completed AND Status != Cancelled",
+      "ApprovalQueue": "Status = AwaitingApproval",
+      "ProductionQueue": "Status IN ReadyForProduction, InProduction; expose ReleasedFilePath",
+      "Exceptions": "Status IN ChangesRequested, ApprovalExpired",
+      "Completed": "Status = Completed"
+    },
+    "OrderCommands": {
+      "Pending": "ProcessingState = Pending",
+      "NeedsReview": "ProcessingState = NeedsReview"
+    },
+    "ApprovalJobs": {
+      "Pending": "JobState IN New, Waiting",
+      "NeedsReview": "JobState = NeedsReview"
+    },
+    "Outbox": {
+      "Pending": "DeliveryState = Pending",
+      "NeedsReview": "DeliveryState = NeedsReview"
+    }
+  }
+}

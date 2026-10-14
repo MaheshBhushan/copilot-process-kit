@@ -1,0 +1,23 @@
+{
+  "commands": [
+    "python3 scripts/generate_samples.py",
+    "cd / && python3 /run/media/maheshk/New Volume/MK-solutions/copilot-process-kit/scripts/generate_samples.py"
+  ],
+  "first": {
+    "data/OrderEvents.csv": "21a0d2108f94c8a59bc5b2ade38e77ccd25d692890f264db8d8f0b23584595d5",
+    "data/Orders.csv": "f7b01a293ef3a50945c37edbeda26ee7fd051ef9d7ee001c84254b593ac5d88f",
+    "data/Usage.csv": "c439da9ceb7172bb0c07650a6d7ed13082ecc0147d9cf71668b9c1f2eccc285f",
+    "data/Users.csv": "4610dbceac092e145b2d90e8850609cfc2957266d417714c593b1a3c1e22e2f0",
+    "data/expected-metrics.json": "171ab6c2c24b16d3b342142239cebebf3a9188785c40cc76770209d8e4cbb20b",
+    "data/scenarios.csv": "0989ac190ae41ba5931898e985cc050713e3444a7655b016b4ff9067287c0d35"
+  },
+  "outsideWorkingDirectory": "/",
+  "second": {
+    "data/OrderEvents.csv": "21a0d2108f94c8a59bc5b2ade38e77ccd25d692890f264db8d8f0b23584595d5",
+    "data/Orders.csv": "f7b01a293ef3a50945c37edbeda26ee7fd051ef9d7ee001c84254b593ac5d88f",
+    "data/Usage.csv": "c439da9ceb7172bb0c07650a6d7ed13082ecc0147d9cf71668b9c1f2eccc285f",
+    "data/Users.csv": "4610dbceac092e145b2d90e8850609cfc2957266d417714c593b1a3c1e22e2f0",
+    "data/expected-metrics.json": "171ab6c2c24b16d3b342142239cebebf3a9188785c40cc76770209d8e4cbb20b",
+    "data/scenarios.csv": "0989ac190ae41ba5931898e985cc050713e3444a7655b016b4ff9067287c0d35"
+  }
+}

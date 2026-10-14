@@ -1,0 +1,61 @@
+ScenarioID,OrderKey,Scenario,ExpectedStatus,Note,EvidenceClass
+SC-01,PO-000001,Completed on time,Completed,Normal approved snapshot and passed QC.,Synthetic fixture
+SC-02,PO-000007,Completed late,Completed,Completion one day after due time.,Synthetic fixture
+SC-03,PO-000013,Administrative correction,Completed,Correction before approval; administrative rework.,Synthetic fixture
+SC-04,PO-000021,Rejected then resubmitted,Completed,New ApprovalKey after rejection; successful decision matches new key.,Synthetic fixture
+SC-05,PO-000030,Approval expired,ApprovalExpired,72 hours elapsed; late response cannot revive this order.,Synthetic fixture
+SC-06,PO-000033,Cancelled before approval,Cancelled,Sales cancellation with reason; no production.,Synthetic fixture
+SC-07,PO-000035,Submitted backlog,Submitted,Active overdue order awaits preflight.,Synthetic fixture
+SC-08,PO-000036,Awaiting approval,AwaitingApproval,Recent request within 72-hour window; no response yet.,Synthetic fixture
+SC-09,PO-000038,Approved awaiting release,Approved,Synthetic file-copy uncertainty drill; hold release until operator verifies snapshot and destination.,Synthetic fixture
+SC-10,PO-000041,Ready for production,ReadyForProduction,Synthetic notification uncertainty drill; outbox NeedsReview does not reverse release.,Synthetic fixture
+SC-11,PO-000045,In production,InProduction,Manual QC rework may occur without extra business transition.,Synthetic fixture
+SC-12,PO-000050,Changes requested,ChangesRequested,Missing consent/artwork drill; no approval request created.,Synthetic fixture
+SC-13,PO-000052,Completed on time,Completed,Normal approved snapshot and passed QC.,Synthetic fixture
+SC-14,PO-000058,Completed late,Completed,Completion one day after due time.,Synthetic fixture
+SC-15,PO-000064,Administrative correction,Completed,Correction before approval; administrative rework.,Synthetic fixture
+SC-16,PO-000072,Rejected then resubmitted,Completed,New ApprovalKey after rejection; successful decision matches new key.,Synthetic fixture
+SC-17,PO-000081,Approval expired,ApprovalExpired,72 hours elapsed; late response cannot revive this order.,Synthetic fixture
+SC-18,PO-000084,Cancelled before approval,Cancelled,Sales cancellation with reason; no production.,Synthetic fixture
+SC-19,PO-000086,Submitted backlog,Submitted,Active overdue order awaits preflight.,Synthetic fixture
+SC-20,PO-000087,Awaiting approval,AwaitingApproval,Recent request within 72-hour window; no response yet.,Synthetic fixture
+SC-21,PO-000089,Approved awaiting release,Approved,Synthetic file-copy uncertainty drill; hold release until operator verifies snapshot and destination.,Synthetic fixture
+SC-22,PO-000092,Ready for production,ReadyForProduction,Synthetic notification uncertainty drill; outbox NeedsReview does not reverse release.,Synthetic fixture
+SC-23,PO-000096,In production,InProduction,Manual QC rework may occur without extra business transition.,Synthetic fixture
+SC-24,PO-000101,Changes requested,ChangesRequested,Missing consent/artwork drill; no approval request created.,Synthetic fixture
+SC-25,PO-000103,Completed on time,Completed,Normal approved snapshot and passed QC.,Synthetic fixture
+SC-26,PO-000109,Completed late,Completed,Completion one day after due time.,Synthetic fixture
+SC-27,PO-000115,Administrative correction,Completed,Correction before approval; administrative rework.,Synthetic fixture
+SC-28,PO-000123,Rejected then resubmitted,Completed,New ApprovalKey after rejection; successful decision matches new key.,Synthetic fixture
+SC-29,PO-000132,Approval expired,ApprovalExpired,72 hours elapsed; late response cannot revive this order.,Synthetic fixture
+SC-30,PO-000135,Cancelled before approval,Cancelled,Sales cancellation with reason; no production.,Synthetic fixture
+SC-31,PO-000137,Submitted backlog,Submitted,Active overdue order awaits preflight.,Synthetic fixture
+SC-32,PO-000138,Awaiting approval,AwaitingApproval,Recent request within 72-hour window; no response yet.,Synthetic fixture
+SC-33,PO-000140,Approved awaiting release,Approved,Synthetic file-copy uncertainty drill; hold release until operator verifies snapshot and destination.,Synthetic fixture
+SC-34,PO-000143,Ready for production,ReadyForProduction,Synthetic notification uncertainty drill; outbox NeedsReview does not reverse release.,Synthetic fixture
+SC-35,PO-000147,In production,InProduction,Manual QC rework may occur without extra business transition.,Synthetic fixture
+SC-36,PO-000152,Changes requested,ChangesRequested,Missing consent/artwork drill; no approval request created.,Synthetic fixture
+SC-37,PO-000154,Completed on time,Completed,Normal approved snapshot and passed QC.,Synthetic fixture
+SC-38,PO-000160,Completed late,Completed,Completion one day after due time.,Synthetic fixture
+SC-39,PO-000166,Administrative correction,Completed,Correction before approval; administrative rework.,Synthetic fixture
+SC-40,PO-000174,Rejected then resubmitted,Completed,New ApprovalKey after rejection; successful decision matches new key.,Synthetic fixture
+SC-41,PO-000183,Approval expired,ApprovalExpired,72 hours elapsed; late response cannot revive this order.,Synthetic fixture
+SC-42,PO-000186,Cancelled before approval,Cancelled,Sales cancellation with reason; no production.,Synthetic fixture
+SC-43,PO-000188,Submitted backlog,Submitted,Active overdue order awaits preflight.,Synthetic fixture
+SC-44,PO-000189,Awaiting approval,AwaitingApproval,Recent request within 72-hour window; no response yet.,Synthetic fixture
+SC-45,PO-000191,Approved awaiting release,Approved,Synthetic file-copy uncertainty drill; hold release until operator verifies snapshot and destination.,Synthetic fixture
+SC-46,PO-000194,Ready for production,ReadyForProduction,Synthetic notification uncertainty drill; outbox NeedsReview does not reverse release.,Synthetic fixture
+SC-47,PO-000198,In production,InProduction,Manual QC rework may occur without extra business transition.,Synthetic fixture
+SC-48,PO-000203,Changes requested,ChangesRequested,Missing consent/artwork drill; no approval request created.,Synthetic fixture
+SC-49,PO-000205,Completed on time,Completed,Normal approved snapshot and passed QC.,Synthetic fixture
+SC-50,PO-000211,Completed late,Completed,Completion one day after due time.,Synthetic fixture
+SC-51,PO-000217,Administrative correction,Completed,Correction before approval; administrative rework.,Synthetic fixture
+SC-52,PO-000225,Rejected then resubmitted,Completed,New ApprovalKey after rejection; successful decision matches new key.,Synthetic fixture
+SC-53,PO-000234,Approval expired,ApprovalExpired,72 hours elapsed; late response cannot revive this order.,Synthetic fixture
+SC-54,PO-000237,Cancelled before approval,Cancelled,Sales cancellation with reason; no production.,Synthetic fixture
+SC-55,PO-000239,Submitted backlog,Submitted,Active overdue order awaits preflight.,Synthetic fixture
+SC-56,PO-000240,Awaiting approval,AwaitingApproval,Recent request within 72-hour window; no response yet.,Synthetic fixture
+SC-57,PO-000242,Approved awaiting release,Approved,Synthetic file-copy uncertainty drill; hold release until operator verifies snapshot and destination.,Synthetic fixture
+SC-58,PO-000245,Ready for production,ReadyForProduction,Synthetic notification uncertainty drill; outbox NeedsReview does not reverse release.,Synthetic fixture
+SC-59,PO-000249,In production,InProduction,Manual QC rework may occur without extra business transition.,Synthetic fixture
+SC-60,PO-000254,Changes requested,ChangesRequested,Missing consent/artwork drill; no approval request created.,Synthetic fixture

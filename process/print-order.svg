@@ -1,0 +1,113 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="3300" height="1270" viewBox="0 0 3300 1270" role="img" aria-labelledby="title desc">
+<title id="title">Print order lifecycle</title><desc id="desc">Five internal lanes, external customer communication, approval timeout and preproduction cancellation exception.</desc>
+<defs><marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#334155"/></marker></defs>
+<rect width="3300" height="1270" fill="white"/>
+<style>text{font:18px sans-serif;fill:#172033}.small{font-size:15px}.task{fill:#fff;stroke:#334155;stroke-width:2}.flow{fill:none;stroke:#334155;stroke-width:2;marker-end:url(#arrow)}.message{stroke-dasharray:7 5}.label{paint-order:stroke;stroke:white;stroke-width:6px;stroke-linejoin:round}</style>
+<rect x="70" y="40" width="3170" height="80" fill="#f1f5f9" stroke="#334155"/>
+<text x="1655" y="90" text-anchor="middle" class="">Customer (external): Sales records consent from ordinary business communication</text>
+<rect x="30" y="170" width="3210" height="200" fill="#eff6ff" stroke="#94a3b8"/>
+<text x="50" y="275" text-anchor="start" class="">Sales</text>
+<rect x="30" y="370" width="3210" height="200" fill="#f0fdf4" stroke="#94a3b8"/>
+<text x="50" y="475" text-anchor="start" class="">Prepress</text>
+<rect x="30" y="570" width="3210" height="200" fill="#fff7ed" stroke="#94a3b8"/>
+<text x="50" y="675" text-anchor="start" class="">Approver</text>
+<rect x="30" y="770" width="3210" height="200" fill="#faf5ff" stroke="#94a3b8"/>
+<text x="50" y="875" text-anchor="start" class="">Production</text>
+<rect x="30" y="970" width="3210" height="200" fill="#f8fafc" stroke="#94a3b8"/>
+<text x="50" y="1075" text-anchor="start" class="">Automation</text>
+<polyline id="Flow_Received" class="flow" points="146,253 200,253"/>
+<polyline id="Flow_Recorded" class="flow" points="350,253 375,253 375,453 400,453"/>
+<polyline id="Flow_Preflight" class="flow" points="550,453 620,450"/>
+<polyline id="Flow_Invalid" class="flow" points="670,450 760,453"/>
+<text x="727.0" y="439.5" text-anchor="middle" class="label small">No</text>
+<polyline id="Flow_ChangeRequested" class="flow" points="910,453 935,453 935,253 960,253"/>
+<polyline id="Flow_Resubmitted" class="flow" points="1035,210 1035,190 475,190 475,410"/>
+<polyline id="Flow_Valid" class="flow" points="645,475 645,1058 1140,1058"/>
+<text x="657.0" y="754.5" text-anchor="middle" class="label small">Yes</text>
+<polyline id="Flow_ApprovalRequested" class="flow" points="1310,1058 1350,1058 1350,653 1400,653"/>
+<polyline id="Flow_Decision" class="flow" points="1570,653 1690,650"/>
+<polyline id="Flow_Rejected" class="flow" points="1715,625 1715,530 835,530 835,495"/>
+<text x="1727.0" y="565.5" text-anchor="middle" class="label small">Reject</text>
+<polyline id="Flow_Approved" class="flow" points="1740,650 1795,650 1795,453 1840,453"/>
+<text x="1779.5" y="638.0" text-anchor="middle" class="label small">Approve</text>
+<polyline id="Flow_Timeout" class="flow" points="1548,713 1548,1058 1630,1058"/>
+<text x="1560.0" y="873.5" text-anchor="middle" class="label small">Deadline reached</text>
+<polyline id="Flow_ExpiredCorrection" class="flow" points="1715,1105 1715,1140 1120,1140 1120,253 1110,253"/>
+<polyline id="Flow_Released" class="flow" points="2010,453 2050,453 2050,853 2090,853"/>
+<polyline id="Flow_Printed" class="flow" points="2260,853 2370,853"/>
+<polyline id="Flow_Checked" class="flow" points="2520,853 2630,850"/>
+<polyline id="Flow_QCPassed" class="flow" points="2680,850 2820,853"/>
+<text x="2762.0" y="839.5" text-anchor="middle" class="label small">Yes</text>
+<polyline id="Flow_QCFailed" class="flow" points="2655,875 2655,905"/>
+<text x="2667.0" y="878.0" text-anchor="middle" class="label small">No</text>
+<polyline id="Flow_Reworked" class="flow" points="2580,933 2445,933 2445,895"/>
+<polyline id="Flow_Closed" class="flow" points="3000,853 3100,853"/>
+<polyline id="Message_Order" class="flow message" points="128,120 128,235"/>
+<polyline id="Message_Corrections" class="flow message" points="1035,210 1035,120"/>
+<circle id="Start_OrderReceived" cx="128.0" cy="253.0" r="18" fill="white" stroke="#334155" stroke-width="2"/>
+<text x="128.0" y="294" text-anchor="middle" class="small">Order received</text>
+<rect id="Task_RecordOrder" x="200" y="210" width="150" height="85" rx="10" class="task"/>
+<text x="275.0" y="246.0" text-anchor="middle" class="">Record order /</text>
+<text x="275.0" y="269.0" text-anchor="middle" class="">Submit</text>
+<rect id="Task_Preflight" x="400" y="410" width="150" height="85" rx="10" class="task"/>
+<text x="475.0" y="446.0" text-anchor="middle" class="">Preflight +</text>
+<text x="475.0" y="469.0" text-anchor="middle" class="">consent check</text>
+<path id="Gateway_OrderValid" d="M645.0,425 L670,450.0 L645.0,475 L620,450.0 Z" class="task"/>
+<text x="645.0" y="457" text-anchor="middle" class="">×</text>
+<text x="645.0" y="500" text-anchor="middle" class="small">Order valid?</text>
+<rect id="Task_RequestChanges" x="760" y="410" width="150" height="85" rx="10" class="task"/>
+<text x="835.0" y="457.5" text-anchor="middle" class="">Request changes</text>
+<rect id="Task_ReviseOrder" x="960" y="210" width="150" height="85" rx="10" class="task"/>
+<text x="1035.0" y="246.0" text-anchor="middle" class="">Revise /</text>
+<text x="1035.0" y="269.0" text-anchor="middle" class="">Resubmit</text>
+<rect id="Task_RequestApproval" x="1140" y="1010" width="170" height="95" rx="10" class="task"/>
+<text x="1225.0" y="1039.5" text-anchor="middle" class="">Validate: freeze</text>
+<text x="1225.0" y="1062.5" text-anchor="middle" class="">snapshot; request</text>
+<text x="1225.0" y="1085.5" text-anchor="middle" class="">approval</text>
+<rect id="Task_InternalApproval" x="1400" y="610" width="170" height="85" rx="10" class="task"/>
+<text x="1485.0" y="646.0" text-anchor="middle" class="">Internal approval</text>
+<text x="1485.0" y="669.0" text-anchor="middle" class="">(exact snapshot)</text>
+<circle id="Boundary_ApprovalTimeout" cx="1548.0" cy="695.0" r="18" fill="white" stroke="#334155" stroke-width="2"/>
+<text x="1548.0" y="702" text-anchor="middle" class="">◷</text>
+<text x="1548.0" y="736" text-anchor="middle" class="small">72h</text>
+<path id="Gateway_ApprovalOutcome" d="M1715.0,625 L1740,650.0 L1715.0,675 L1690,650.0 Z" class="task"/>
+<text x="1715.0" y="657" text-anchor="middle" class="">×</text>
+<text x="1715.0" y="700" text-anchor="middle" class="small">Approved?</text>
+<rect id="Task_RecordExpiry" x="1630" y="1010" width="170" height="95" rx="10" class="task"/>
+<text x="1715.0" y="1051.0" text-anchor="middle" class="">Record expiry /</text>
+<text x="1715.0" y="1074.0" text-anchor="middle" class="">ApprovalExpired</text>
+<rect id="Task_ReleaseArtwork" x="1840" y="410" width="170" height="85" rx="10" class="task"/>
+<text x="1925.0" y="446.0" text-anchor="middle" class="">Release approved</text>
+<text x="1925.0" y="469.0" text-anchor="middle" class="">snapshot</text>
+<rect id="Task_PrintFinish" x="2090" y="810" width="170" height="85" rx="10" class="task"/>
+<text x="2175.0" y="846.0" text-anchor="middle" class="">StartProduction;</text>
+<text x="2175.0" y="869.0" text-anchor="middle" class="">print + finish</text>
+<rect id="Task_QualityCheck" x="2370" y="810" width="150" height="85" rx="10" class="task"/>
+<text x="2445.0" y="846.0" text-anchor="middle" class="">Manual quality</text>
+<text x="2445.0" y="869.0" text-anchor="middle" class="">check</text>
+<path id="Gateway_QualityPass" d="M2655.0,825 L2680,850.0 L2655.0,875 L2630,850.0 Z" class="task"/>
+<text x="2655.0" y="857" text-anchor="middle" class="">×</text>
+<text x="2655.0" y="810" text-anchor="middle" class="small">QC passed?</text>
+<rect id="Task_Rework" x="2580" y="905" width="150" height="55" rx="10" class="task"/>
+<text x="2655.0" y="926.0" text-anchor="middle" class="">Production</text>
+<text x="2655.0" y="949.0" text-anchor="middle" class="">rework</text>
+<rect id="Task_CloseOrder" x="2820" y="810" width="180" height="85" rx="10" class="task"/>
+<text x="2910.0" y="846.0" text-anchor="middle" class="">Complete with QC</text>
+<text x="2910.0" y="869.0" text-anchor="middle" class="">reference + waste</text>
+<circle id="End_Completed" cx="3118.0" cy="853.0" r="18" fill="white" stroke="#334155" stroke-width="4"/>
+<text x="3118.0" y="894" text-anchor="middle" class="small">Completed</text>
+<rect id="SubProcess_Cancel" x="2180" y="195" width="1000" height="140" rx="10" fill="white" stroke="#334155" stroke-width="2" stroke-dasharray="8 4"/>
+<text x="2680" y="220" text-anchor="middle" class="">Interrupting cancellation: Sales / Owner; reason required</text>
+<polyline id="Flow_CancelRecord" class="flow" points="2246,266 2350,265"/>
+<polyline id="Flow_CancelEnd" class="flow" points="2540,265 2650,266"/>
+<circle id="Start_Cancel" cx="2228" cy="266" r="18" fill="white" stroke="#334155"/><rect id="Task_RecordCancellation" x="2350" y="230" width="190" height="70" rx="10" class="task"/><circle id="End_Cancelled" cx="2668" cy="266" r="18" fill="white" stroke="#334155" stroke-width="4"/>
+<text x="2445" y="258.5" text-anchor="middle" class="">Record Cancelled +</text>
+<text x="2445" y="281.5" text-anchor="middle" class="">reason</text>
+<text x="2228" y="308" text-anchor="middle" class="small">Authorized Cancel</text>
+<text x="2668" y="308" text-anchor="middle" class="small">Cancelled</text>
+<text x="2890" y="264" text-anchor="middle" class="small">Allowed before production only</text>
+<text x="2890" y="290" text-anchor="middle" class="small">Excludes AwaitingApproval</text>
+<text x="2890" y="314" text-anchor="middle" class="small">and InProduction</text>
+<text x="70" y="1215" text-anchor="start" class="small">Contract 1.0 · 72 elapsed hours; one reminder after 24h · Internal approval is separate from customer consent</text>
+<text x="70" y="1245" text-anchor="start" class="small">QC rework stays InProduction until Complete. Technical failure preserves business state. BPMN is descriptive, not executable.</text>
+</svg>
