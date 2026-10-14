@@ -1,6 +1,6 @@
 # Local verification report
 
-Observed at 2026-10-14T17:13:07Z. Python 3.14.6.
+Observed at 2026-10-14T17:15:05Z. Python 3.14.6.
 
 Commands actually run:
 
@@ -23,7 +23,7 @@ The two generator invocations and their recorded hashes are in [determinism.json
 | Metrics | PASS: 22 exact metrics including all weekly/status buckets reconcile; fixed reference values agree |
 | Action map | PASS: 96 unique actions across four native flow guides; schema/system-field and BPMN references resolve |
 | Tenant/agent cases | PASS: 35 acceptance and 28 evaluation cases populated; every live result remains Pending |
-| Markdown links | PASS: 114 relative links/anchors resolve within kit |
+| Markdown links | PASS: 108 relative links/anchors resolve within kit |
 | Manifest/artifact classes | PASS: 54 files inventoried; no PBIX/solution export claim; tenant and Desktop Pending |
 | Determinism | PASS: 6 CSV/JSON SHA256 hashes identical across two runs, including a run from / |
 
